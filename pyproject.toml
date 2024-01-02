@@ -1,0 +1,25 @@
+[project]
+name = "yutils"
+
+version = "0.0.1"
+
+description = "Xinyu's common utilities"
+
+requires-python = ">=3.7"
+
+license = {file = "LICENSE"}
+
+authors = [
+  {name = "Xinyu Yang", email = "cauyxy@gmail.com" } # Optional
+]
+
+maintainers = [
+  {name = "Xinyu Yang", email = "cauyxy@gmail.com" } # Optional
+]
+
+[project.urls]  # Optional
+"Source" = "https://github.com/cauyxy/yutils/"
+
+[build-system]
+requires = ["setuptools>=43.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
