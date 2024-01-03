@@ -1,5 +1,5 @@
 [project]
-name = "yutils"
+name = "yutilx"
 
 version = "0.0.1"
 readme = "README.md"
@@ -17,7 +17,7 @@ maintainers = [
 ]
 
 [project.urls]
-"Source" = "https://github.com/cauyxy/yutils/"
+"Source" = "https://github.com/cauyxy/yutilx/"
 
 [build-system]
 requires = ["setuptools>=43.0.0", "wheel"]
