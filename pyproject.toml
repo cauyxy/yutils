@@ -2,6 +2,7 @@
 name = "yutils"
 
 version = "0.0.1"
+readme = "README.md"
 
 description = "Xinyu's common utilities"
 
