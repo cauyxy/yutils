@@ -7,17 +7,15 @@ description = "Xinyu's common utilities"
 
 requires-python = ">=3.7"
 
-license = {file = "LICENSE"}
-
 authors = [
-  {name = "Xinyu Yang", email = "cauyxy@gmail.com" } # Optional
+  {name = "Xinyu Yang", email = "cauyxy@gmail.com" }
 ]
 
 maintainers = [
-  {name = "Xinyu Yang", email = "cauyxy@gmail.com" } # Optional
+  {name = "Xinyu Yang", email = "cauyxy@gmail.com" }
 ]
 
-[project.urls]  # Optional
+[project.urls]
 "Source" = "https://github.com/cauyxy/yutils/"
 
 [build-system]
