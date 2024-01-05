@@ -1,7 +1,7 @@
 [project]
 name = "yutilx"
 
-version = "0.0.1"
+version = "0.0.1.post1"
 readme = "README.md"
 
 description = "Xinyu's common utilities"
