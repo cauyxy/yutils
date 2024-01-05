@@ -41,6 +41,8 @@ class CachedParallelProcessor(object):
             f.write(json.dumps(data) + "\n")
 
     def process_one_sample(self, input_str: str) -> None:
+        if not isinstance(input_str, str):
+            return
         shash = get_string_hash(input_str)
         if shash in self.cache_dic:
             return
