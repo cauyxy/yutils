@@ -25,6 +25,7 @@ class CachedParallelProcessor(object):
             logging.warning("cache_filename is not set, using default cache filename")
             cache_filename = "cache.jsonl"
         self.cache_dic = None
+        self.dynamic_cache_set = None
         self.cache_filename = cache_filename
 
     def read_cache(self):
@@ -37,6 +38,7 @@ class CachedParallelProcessor(object):
             return cache_dic
 
     def append_cache(self, data: dict) -> None:
+        self.dynamic_cache_set.add(data["shash"])
         with open(self.cache_filename, "a+") as f:
             f.write(json.dumps(data) + "\n")
 
@@ -44,7 +46,7 @@ class CachedParallelProcessor(object):
         if not isinstance(input_str, str):
             return
         shash = get_string_hash(input_str)
-        if shash in self.cache_dic:
+        if shash in self.dynamic_cache_set:
             return
         for _ in range(self.max_retry_cnt):
             try:
@@ -58,6 +60,7 @@ class CachedParallelProcessor(object):
 
     def run(self, input_lis: List[str], num_threads: int = 10) -> None:
         self.cache_dic = self.read_cache()
+        self.dynamic_cache_set = set(self.cache_dic.keys())
         print("Start processing...")
         print(f"{len(self.cache_dic):,} items in cache")
         with ThreadPoolExecutor(max_workers=num_threads) as executor:
