@@ -1,11 +1,11 @@
-from typing import Callable, Optional, List
-
-import json
 import hashlib
+import json
 import logging
 import os.path
-from tqdm import tqdm
 from concurrent.futures import ThreadPoolExecutor
+from typing import Callable, List, Optional
+
+from tqdm import tqdm
 
 
 def get_string_hash(s):
@@ -18,6 +18,7 @@ class CachedParallelProcessor(object):
         process_func: Callable[[str], str],
         max_retry_cnt: int = 3,
         cache_filename: Optional[str] = None,
+        cache_file_free: bool = False,
     ):
         self.process_func = process_func
         self.max_retry_cnt = max_retry_cnt
@@ -27,8 +28,11 @@ class CachedParallelProcessor(object):
         self.cache_dic = None
         self.dynamic_cache_set = None
         self.cache_filename = cache_filename
+        self.cache_file_free = cache_file_free
 
     def read_cache(self):
+        if self.cache_file_free:
+            return self.cache_dic or {}
         if not os.path.exists(self.cache_filename):
             open(self.cache_filename, "a").close()
             return {}
@@ -39,6 +43,9 @@ class CachedParallelProcessor(object):
 
     def append_cache(self, data: dict) -> None:
         self.dynamic_cache_set.add(data["shash"])
+        if self.cache_file_free:
+            self.cache_dic[data["shash"]] = data["result"]
+            return
         with open(self.cache_filename, "a+") as f:
             f.write(json.dumps(data) + "\n")
 
